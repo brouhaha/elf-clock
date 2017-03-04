@@ -36,9 +36,8 @@ to 3C to divide by 60 rather than 61.
 If you have an Elf with some other clock frequency, there will be
 greater error in the timekeeping. C'est la vie.
 
-The program occupies 252 bytes out of the 256 bytes of memory of an
-unexpanded Elf, and uses an additional 2 bytes for the stack, so there
-are only 2 bytes to spare.
+The program occupies 254 bytes out of the 256 bytes of memory of an
+unexpanded Elf, with the remaining 2 bytes used for the stack.
 
 This has been tested on a Netronics ELF II, and on the EMMA 02
 emulator.

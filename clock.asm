@@ -17,9 +17,15 @@
 ; Macro Assembler AS:
 ;   http://john.ccac.rwth-aachen.de:8000/as/
 
+; The program can be assembled to provide either a 12-hour or 24-hour
+; digital clock, by defining clkhrs as either 12 or 24. If clkhrs is not
+; defined by a command-line argument to the assembler, define it here:
+	ifndef	clkhrs
 clkhrs	equ	12
+	endif
 
-	cpu	1802
+; ----------------------------------------------------------------------
+; register definitions
 
 ; display DMA and interrupt
 dmaptr	equ	0	; r0:  DMA pointer
@@ -48,7 +54,18 @@ rowcnt	equ	15	; r15.0: pixel row counter, used in interrupt
 
 ; initialization
 
-reset:	ghi	dmaptr
+reset:
+
+; Enable interrupts. This is not required if running directly from
+; CDP1802 RESET/CLEAR, which leave interrupt enabled, but may be
+; necessary if loading from a monitor program or operating system that
+; disables interrupts. Note that this assumes that the X register is
+; zero on entry, which is also true when running directly from CDP1802
+; RESET/CLEAR.
+	ret
+	db	000h
+
+	ghi	dmaptr
 
 ; for an Elf with only 256 bytes of RAM (undecoded), the following
 ; sequence of phi instructions could be omitted
