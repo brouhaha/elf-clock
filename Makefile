@@ -25,6 +25,9 @@ clock12.p clock12.lst: clock.asm
 clock24.p clock24.lst: clock.asm
 	asl -cpu 1802 -D clkhrs=24 -o clock24.p -L -OLIST clock24.lst +t 0xfc $<
 
+%.dump: %.hex
+	./i2hd.py $< -o $@
+
 %.pdf: %.lst
 	mpage -2 -l $< | ps2pdf - $@
 

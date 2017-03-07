@@ -2,3 +2,5 @@
 *.p
 *.hex
 *.lst
+*.dump
+__pycache__
