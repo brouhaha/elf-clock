@@ -222,6 +222,9 @@ intret:
 	ret		; return, restoring X and P, and reenabling interrupt
 
 ; PIXIE display interrupt routine
+; Note that this interrupt routine does not save and restore the DF flag,
+; which works because the interrupt routine doesn't contain any add,
+; subtract, or shift instructions.
 
 int:	nop			;  0- 2  3 cyc instr for pgm sync
 
